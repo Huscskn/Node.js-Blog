@@ -19,7 +19,7 @@
 <!-- Main Content -->
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
+    <div id="tst" class="col-lg-8 col-md-10 mx-auto">
       @each(post in posts)
         <div class="post-preview">
           <a href="/post/{{ post._id }}">
@@ -39,5 +39,18 @@
 </div>
 
 <hr>
+<script src="/socket.io/socket.io.js"></script>
+  <script>
+    //var socket = io('http://127.0.0.1:4000');
+    var tst = document.getElementById('tst');
+    var socket = io();
+    console.log(socket);
+    socket.on('new post', function(msg){
+      var daString="<div id=\'block\' class=\'post-preview\'><a href=\'#\'><h2 class=\'post-title\'>"+msg+"</h2></a></div>";
+      $("#tst").prepend(daString);
+    console.log(JSON.stringify(msg));
+    });
+
+</script>
 @endsection 
  
